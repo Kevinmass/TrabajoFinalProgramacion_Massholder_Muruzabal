@@ -6,11 +6,11 @@ using namespace std;
 
 void PrimerIngreso(vector<Cliente> &C)
 {
-    int n, p, q, x;
+    int n, p, q, x, y=0;
     string m;
     cout << "**No hay clientes registrados en el sistema...\n**Ingrese un cliente para continuar...\n\nCuantos clientes desea ingresar?\n\n";
     cin >> x;
-    // Nacho Magoia 1 Activo 100 12 2020 Black 1000
+    // 2 Nacho Magoia 1 Activo 100 12 2020 Black 1000 Juan Muruzabal 2 Pasivo 1 1 2019 Black 2000
     try
     {
         for (int i = 0; i < x; i++)
@@ -23,9 +23,36 @@ void PrimerIngreso(vector<Cliente> &C)
             cout << "\nIngrese Apellido del cliente: \n";
             cin >> m;
             C.back().setApellido(m);
-            cout << "\nIngrese el ID del cliente: \n";
-            cin >> n;
-            C.back().setID(n);
+            if (y==0)
+            {
+                y++;
+                cout << "\nIngrese el ID del cliente: \n";
+                cin >> n;
+                C.back().setID(n);
+            }else{
+            q=1;
+            do
+            {
+                cout << "\nIngrese el ID del cliente: \n";
+                cin >> n;
+                p=1;
+                for (int i = 0; i < C.size(); i++)
+                {
+                    if (n==C[i].getID())
+                    {
+                        cout << "\nEl ID ingresado ya existe, ingrese otro ID\n";
+                        p=0;
+                        break;
+                    }
+                }
+                if (p==1)
+                {
+                    q=0;
+                }
+                
+            } while (q==1);
+            }
+            
             cout << "\nIngrese el estado de la cuenta: \n";
             cin >> m;
             C.back().setEstado(m);
@@ -55,8 +82,7 @@ void PrimerIngreso(vector<Cliente> &C)
 
 void Estado(vector<Cliente> &C)
 {
-    int a = size(C);
-    for (int i = 0; i < a; i++)
+    for (int i = 0; i < size(C); i++)
     {
         Cliente *x = &C[i];
         cout << "\n\nCliente ID: " << x->getID() << "\n";
@@ -64,8 +90,8 @@ void Estado(vector<Cliente> &C)
         cout << "Apellido: " << x->getApellido() << "\n";
         cout << "Estado: " << x->getEstado() << "\n";
         cout << "------------------------------------------------------------------------------------\n\n";
-        delete x;
     }
+    
 } // Funciona
 
 void MenuMantenimiento(vector<Cliente> &C)
@@ -98,7 +124,6 @@ void MenuMantenimiento(vector<Cliente> &C)
                     cin >> m;
                     y->setApellido(m);
                 }
-                delete y;
             }
             break;
             if (q == 0)
@@ -120,7 +145,6 @@ void MenuMantenimiento(vector<Cliente> &C)
                     cin >> m;
                     y->setEstado(m);
                 }
-                delete y;
             }
             break;
             if (q == 0)
@@ -141,7 +165,6 @@ void MenuMantenimiento(vector<Cliente> &C)
                     cin >> m;
                     y->setClase(m);
                 }
-                delete y;
             }
             break;
             if (q == 0)
@@ -173,9 +196,7 @@ bool CheqFecha(int x, int y)
         return false;
     }
 } // NO Funciona, me falla la logica
-void arreglaCajas(int x)
-{
-}
+
 void MenuTransacciones(vector<Cliente> &C, int &nro)
 {
     int n, p, q, x, w;
@@ -227,7 +248,6 @@ void MenuTransacciones(vector<Cliente> &C, int &nro)
                         cout << "Memoria Insuficiente\n";
                     }
                 }
-                delete y;
             }
             break;
             if (w == 0)
@@ -293,7 +313,6 @@ void MenuTransacciones(vector<Cliente> &C, int &nro)
                         cout << "Memoria Insuficiente\n";
                     }
                 }
-                delete y;
             }
             break;
             if (w == 0)
@@ -301,15 +320,14 @@ void MenuTransacciones(vector<Cliente> &C, int &nro)
                 cout << "Cliente no encontrado...\n Verifique el ID ingresado...\n";
             }
         case 3:
-            w = 1;
+            w = 0;
             for (int i = 0; i < size(C); i++)
             {
                 Cliente *y = &C[i];
-                if (size(y->transaccion) == 0)
+                if (size(y->transaccion) != 0)
                 {
-                    w = 0;
+                    w = 1;
                 }
-                delete y;
             }
             if (w == 1)
             {
@@ -335,7 +353,6 @@ void MenuTransacciones(vector<Cliente> &C, int &nro)
                                 cout << "------------------------------------------------------------------------------------------\n\n";
                             }
                         }
-                        delete y;
                     } // Me falla la logica
 
                     break;
@@ -357,7 +374,6 @@ void MenuTransacciones(vector<Cliente> &C, int &nro)
                                 cout << "------------------------------------------------------------------------------------------\n\n";
                             }
                         }
-                        delete y;
                     } // Me falla la logica
                     break;
                 case 3:
@@ -375,7 +391,6 @@ void MenuTransacciones(vector<Cliente> &C, int &nro)
                             cout << "      Cliente: " << y->getNombre() << " " << y->getApellido() << "\n";
                             cout << "------------------------------------------------------------------------------------------\n\n";
                         }
-                        delete y;
                     } // Probablemente funciona
 
                     break;
@@ -431,7 +446,6 @@ void MenuConsultas(vector<Cliente> &C, int &nro)
                     cout << "Saldo actual: $" << y->getCaja() << "\n";
                     cout << "Fecha de creacion de la cuenta: " << y->getDia() << " / " << y->getMes() << " / " << y->getAnio() << "\n";
                 }
-                delete y;
             }
             if (w == 0)
             {
@@ -451,21 +465,19 @@ void MenuConsultas(vector<Cliente> &C, int &nro)
                 cout << "Saldo actual: $" << y->getCaja() << "\n";
                 cout << "Fecha de creacion de la cuenta: " << y->getDia() << "/" << y->getMes() << "/" << y->getAnio() << "\n";
                 cout << "------------------------------------------------------------------------------------------\n\n";
-                delete y;
             }
 
             break;
         case 3:
-            w = 1;
+            w = 0;
             p = size(C);
             for (int i = 0; i < p; i++)
             {
                 Cliente *y = &C[i];
-                if (size(y->transaccion) == 0)
+                if (size(y->transaccion) != 0)
                 {
-                    w = 0;
+                    w = 1;
                 }
-                delete y;
             }
             if (w == 1)
             {
@@ -485,7 +497,6 @@ void MenuConsultas(vector<Cliente> &C, int &nro)
                         cout << "     Cliente: " << y->getNombre() << " " << y->getApellido() << "\n";
                         cout << "------------------------------------------------------------------------------------------\n\n";
                     }
-                    delete y;
                 }
 
                 break;
