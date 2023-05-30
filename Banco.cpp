@@ -49,12 +49,11 @@ void Banco::setFecha(int _dia, int _mes, int _anio)
             }
             else
                 llave = true;
-                if (_mes > 12)
-                {
-                    _anio++;
-                    _mes = _mes - 12;
-                }
-                
+            if (_mes > 12)
+            {
+                _anio++;
+                _mes = _mes - 12;
+            }
         }
         else if (_mes == 4 || _mes == 6 || _mes == 9 || _mes == 11)
         {
@@ -95,13 +94,13 @@ void Banco::setFecha(int _dia, int _mes, int _anio)
             if (_dia > 31)
             {
                 llave = false;
-            } 
+            }
         }
         else if (_mes == 4 || _mes == 6 || _mes == 9 || _mes == 11 || _mes > 12)
         {
             if (_dia > 30)
             {
-             llave = false;
+                llave = false;
             }
         }
         else if (_mes == 2 || _mes > 12)
@@ -122,10 +121,10 @@ void Banco::setFecha(int _dia, int _mes, int _anio)
             }
         }
         if (_mes > 12)
-                {
-                    _anio++;
-                    _mes = _mes - 12;
-                }
+        {
+            _anio++;
+            _mes = _mes - 12;
+        }
     } while (llave == false);
     dia = _dia;
     mes = _mes;

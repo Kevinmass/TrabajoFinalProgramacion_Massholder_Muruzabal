@@ -46,7 +46,7 @@ void PrimerIngreso(vector<Cliente> &C)
             cout << "------------------------------------------------------------------------------------\n\n";
         }
     }
-    catch (std::bad_alloc &e)
+    catch (std::bad_alloc &)
     {
         cout << "Memoria Insuficiente\n";
     }
@@ -163,7 +163,7 @@ void MenuMantenimiento(vector<Cliente> &C)
 bool CheqFecha(int x, int y)
 {
     Cliente C;
-    
+
     if (C.FechaActual.getAnio() > y || (C.FechaActual.getAnio() == y && C.FechaActual.getMes() >= x))
     {
         return true;
@@ -171,10 +171,10 @@ bool CheqFecha(int x, int y)
     else
     {
         return false;
-    } 
+    }
 } // NO Funciona, me falla la logica
-void arreglaCajas(int x){
-    
+void arreglaCajas(int x)
+{
 }
 void MenuTransacciones(vector<Cliente> &C, int &nro)
 {
@@ -221,10 +221,8 @@ void MenuTransacciones(vector<Cliente> &C, int &nro)
                         cout << "Anio: \n";
                         cin >> q;
                         y->transaccion.back().setFecha(n, p, q);
-                        
-                        
                     }
-                    catch (std::bad_alloc &e)
+                    catch (std::bad_alloc &)
                     {
                         cout << "Memoria Insuficiente\n";
                     }
@@ -255,7 +253,7 @@ void MenuTransacciones(vector<Cliente> &C, int &nro)
                         nro++;
                         y->transaccion.back().setNumeroTransaccion(nro);
                         cout << "Transaccion nro: " << nro << "\n";
-                        q=0;
+                        q = 0;
                         do
                         {
                             cout << "Ingrese la cantidad a retirar: \n";
@@ -269,26 +267,28 @@ void MenuTransacciones(vector<Cliente> &C, int &nro)
                                 q = 1;
                                 y->transaccion.back() - (n);
                                 y->setCaja(y->getCaja() - n);
-                            }else if(n==0){
-                                q=1;
                             }
-                        } while (q ==0);
+                            else if (n == 0)
+                            {
+                                q = 1;
+                            }
+                        } while (q == 0);
                         if (n != 0)
                         {
                             cout << "Ingrese el tipo de transaccion: \n";
-                        cin >> m;
-                        y->transaccion.back().setClase(m);
-                        cout << "Ingrese la fecha del retiro: \n";
-                        cout << "Dia: \n";
-                        cin >> n;
-                        cout << "Mes: \n";
-                        cin >> p;
-                        cout << "Anio: \n";
-                        cin >> q;
-                        y->transaccion.back().setFecha(n, p, q);
+                            cin >> m;
+                            y->transaccion.back().setClase(m);
+                            cout << "Ingrese la fecha del retiro: \n";
+                            cout << "Dia: \n";
+                            cin >> n;
+                            cout << "Mes: \n";
+                            cin >> p;
+                            cout << "Anio: \n";
+                            cin >> q;
+                            y->transaccion.back().setFecha(n, p, q);
                         }
                     }
-                    catch (std::bad_alloc &e)
+                    catch (std::bad_alloc &)
                     {
                         cout << "Memoria Insuficiente\n";
                     }
@@ -398,7 +398,7 @@ void MenuTransacciones(vector<Cliente> &C, int &nro)
             break;
         }
     } while (llave == false);
-} // Funciona parcialmente, revisar, no modifica la caja del cliente
+} // Funciona parcialmente
 
 void MenuConsultas(vector<Cliente> &C, int &nro)
 {
@@ -486,7 +486,7 @@ void MenuConsultas(vector<Cliente> &C, int &nro)
                         cout << "------------------------------------------------------------------------------------------\n\n";
                     }
                     delete y;
-                } // No funciona, revisar
+                }
 
                 break;
             }
@@ -503,7 +503,7 @@ void MenuConsultas(vector<Cliente> &C, int &nro)
         }
 
     } while (llave == false);
-} // Funciona parcialmente, revisar caso 3
+} // Funciona
 int main()
 {
     int n, p, q, x, nro = 0;
