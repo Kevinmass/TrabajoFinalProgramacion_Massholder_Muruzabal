@@ -2,7 +2,6 @@
 #include <vector>
 #include "Banco.h"
 #include "Transacciones.h"
-#pragma once
 class Cliente : public Banco
 {
 private:

@@ -35,6 +35,5 @@ public:
     int getMes();
     int getAnio();
     void setClase(std::string _clase);
-    void setCaja(int _caja);
     void setFecha(int _dia, int _mes, int _anio);
 };

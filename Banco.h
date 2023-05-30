@@ -24,7 +24,7 @@ public:
         clase = "Bronce";
         caja = 0;
         dia = 1;
-        mes = 1;
+        mes = 6;
         anio = 2023;
     }
     virtual std::string getClase();

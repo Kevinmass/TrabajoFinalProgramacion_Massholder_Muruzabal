@@ -13,11 +13,11 @@ void Transacciones::setNumeroTransaccion(int _NumeroTransaccion)
 
 void Transacciones::operator+(int x)
 {
-    caja = caja + x;
+    caja =  x;
 }
 void Transacciones::operator-(int x)
 {
-    caja = caja - x;
+    caja = (-x);
 }
 
 std::string Transacciones::getClase()
@@ -43,10 +43,6 @@ int Transacciones::getAnio()
 void Transacciones::setClase(std::string _clase)
 {
     clase = _clase;
-}
-void Transacciones::setCaja(int _caja)
-{
-    caja = _caja;
 }
 void Transacciones::setFecha(int _dia, int _mes, int _anio)
 {
